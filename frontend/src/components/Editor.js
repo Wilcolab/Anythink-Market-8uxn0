@@ -10,6 +10,7 @@ import {
   EDITOR_PAGE_UNLOADED,
   UPDATE_FIELD_EDITOR,
 } from "../constants/actionTypes";
+import placeholder from "../imgs/placeholder.png";
 
 const mapStateToProps = (state) => ({
   ...state.editor,
@@ -49,16 +50,16 @@ class Editor extends React.Component {
 
     this.submitForm = (ev) => {
       ev.preventDefault();
-      // if(this.props.image === ""){
-      //   alert("Please enter an Image url")
-      //   return;
-      // }
+
       const item = {
         title: this.props.title,
         description: this.props.description,
         image: this.props.image,
         tagList: this.props.tagList,
       };
+      if (this.props.image === "") {
+        item.image = placeholder;
+      }
 
       const slug = { slug: this.props.itemSlug };
       const promise = this.props.itemSlug
