@@ -2,12 +2,9 @@ import ItemActions from "./ItemActions";
 import { Link } from "react-router-dom";
 import React from "react";
 
-
 const ItemMeta = (props) => {
   const item = props.item;
 
-
-   
   return (
     <div className="d-flex flex-row align-items-center pt-2">
       <Link to={`/@${item.seller.username}`}>

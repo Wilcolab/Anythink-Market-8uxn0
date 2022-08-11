@@ -8,10 +8,6 @@ import {
   ITEM_PAGE_LOADED,
   ITEM_PAGE_UNLOADED,
 } from "../../constants/actionTypes";
-import placeholder from "../../imgs/placeholder.png"
-let image;
-
-
 
 const mapStateToProps = (state) => ({
   ...state.item,
@@ -23,9 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
   onUnload: () => dispatch({ type: ITEM_PAGE_UNLOADED }),
 });
 
-
 class Item extends React.Component {
-  
   componentWillMount() {
     this.props.onLoad(
       Promise.all([
@@ -33,24 +27,17 @@ class Item extends React.Component {
         agent.Comments.forItem(this.props.match.params.id),
       ])
     );
-
   }
-  
 
   componentWillUnmount() {
     this.props.onUnload();
   }
-  
-
-  
 
   render() {
     if (!this.props.item) {
       return null;
     }
-    if (this.props.item.image === "" ){
-      image = placeholder
-    }else image = this.props.item.image
+
     const markup = {
       __html: marked(this.props.item.description, { sanitize: true }),
     };
@@ -58,17 +45,13 @@ class Item extends React.Component {
       this.props.currentUser &&
       this.props.currentUser.username === this.props.item.seller.username;
 
-      
     return (
       <div className="container page">
         <div className="text-dark">
           <div className="row bg-white p-4">
             <div className="col-6">
-
-
-
               <img
-                src={image}
+                src={this.props.item.image}
                 alt={this.props.item.title}
                 className="item-img"
                 style={{ height: "500px", width: "100%", borderRadius: "6px" }}
