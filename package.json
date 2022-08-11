@@ -1,4 +1,5 @@
 {
+  "license": "pending",
   "dependencies": {
     "eslint": "^8.21.0",
     "lint": "^0.7.0",
