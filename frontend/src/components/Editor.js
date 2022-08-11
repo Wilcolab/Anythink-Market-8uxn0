@@ -57,7 +57,11 @@ class Editor extends React.Component {
         image: this.props.image,
         tagList: this.props.tagList,
       };
-      if (this.props.image === "") {
+      if (
+        this.props.image === "" ||
+        this.props.image === null ||
+        this.props.image === undefined
+      ) {
         item.image = placeholder;
       }
 
