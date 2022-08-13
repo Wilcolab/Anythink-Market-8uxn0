@@ -124,10 +124,10 @@ class Profile extends React.Component {
       this.props.profile.username === this.props.currentUser.username;
 
     return (
-      <div className="profile-page">
-        <div className="container profile__container col-sm">
-          <div className="row p-4  ">
-            <div className="user-info col-xs-12 col-md-8 offset-md-2">
+      <div className="profile-page profile__container">
+        <div className="container  col-sm ">
+          <div className="row p-4 text-center ">
+            <div className="user-info col-xs-12 col-md-8 offset-md-2 ">
               <img
                 src={profile.image}
                 className="user-img"
