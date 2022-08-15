@@ -193,7 +193,7 @@ router.get("/:tag", auth.optional, function (req, res, next) {
     req.payload ? User.findById(req.params.id) : null,
     req.tag.populate("seller").execPopulate(),
   ])
-    .then(function (resulrs) {
+    .then(function (results) {
       let user = results[0];
       return res.json({ item: req.item.toJSONFor(user) });
     })
