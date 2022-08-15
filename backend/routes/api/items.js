@@ -191,7 +191,7 @@ router.get("/:item", auth.optional, function (req, res, next) {
 router.get("/:tag", auth.optional, function (req, res, next) {
   Promise.all([
     req.payload ? User.findById(req.params.id) : null,
-    req.tag.populate("seller").execPopulate(),
+    req.tag.populate("tagList").execPopulate(),
   ])
     .then(function (results) {
       let user = results[0];
