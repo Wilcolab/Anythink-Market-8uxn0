@@ -22,18 +22,18 @@ router.param("item", function (req, res, next, slug) {
     .catch(next);
 });
 
-router.param("title", function (req, res, next, slug) {
-  Item.find({ slug: slug })
-    .populate("seller")
-    .then(function (title) {
-      if (!title) {
-        return res.sendStatus();
-      }
-      req.title = title;
-      return next();
-    })
-    .catch(next);
-});
+// router.param("title", function (req, res, next, slug) {
+//   Item.find({ slug: slug })
+//     .populate("seller")
+//     .then(function (title) {
+//       if (!title) {
+//         return res.sendStatus();
+//       }
+//       req.title = title;
+//       return next();
+//     })
+//     .catch(next);
+// });
 
 router.param("comment", function (req, res, next, id) {
   Comment.findById(id)
@@ -49,7 +49,7 @@ router.param("comment", function (req, res, next, id) {
     .catch(next);
 });
 
-router.get("/", auth.optional, function (req, res, next) {
+router.get("/:title", auth.optional, function (req, res, next) {
   var query = {};
   var limit = 100;
   var offset = 0;
@@ -64,6 +64,9 @@ router.get("/", auth.optional, function (req, res, next) {
 
   if (typeof req.query.tag !== "undefined") {
     query.tagList = { $in: [req.query.tag] };
+  }
+  if (typeof req.query.title !== "undefined") {
+    var title = req.params.title;
   }
 
   Promise.all([
@@ -186,9 +189,8 @@ router.get("/:item", auth.optional, function (req, res, next) {
 });
 
 // update item
-router.put("/:item/:title", auth.required, function (req, res, next) {
-  // router.put("/:item", auth.required, function(req, res, next) {
-
+// router.put("/:item/:title", auth.required, function (req, res, next) {
+router.put("/:item", auth.required, function (req, res, next) {
   User.findById(req.payload.id).then(function (user) {
     if (req.item.seller._id.toString() === req.payload.id.toString()) {
       if (typeof req.body.item.title !== "undefined") {
