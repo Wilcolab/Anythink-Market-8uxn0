@@ -24,7 +24,7 @@ router.param("item", function (req, res, next, slug) {
 
 router.param("title", function (req, res, next, slug) {
   Item.find({ slug: slug })
-    .populate("seller")
+    .populate("item")
     .then(function (title) {
       if (!title) {
         return res.sendStatus(404);
