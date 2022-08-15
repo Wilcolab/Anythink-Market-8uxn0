@@ -187,10 +187,12 @@ router.get("/:item", auth.optional, function (req, res, next) {
     })
     .catch(next);
 });
+
 //Added: return a tag
 router.get("/:tag", auth.optional, function (req, res, next) {
   Promise.all([
-    req.payload ? Item.findById(req.params.id) : null,
+    // Item.find({ seller: { $in: user.following } })
+    req.payload ? Item.find({ tagList: req.params.tag }) : null,
     req.tag.populate("tagList").execPopulate(),
   ])
     .then(function (results) {
