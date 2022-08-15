@@ -190,12 +190,12 @@ router.get("/:item", auth.optional, function (req, res, next) {
 //Added: return a tag
 router.get("/:tag", auth.optional, function (req, res, next) {
   Promise.all([
-    req.payload ? User.findById(req.params.id) : null,
+    req.payload ? Item.findById(req.params.id) : null,
     req.tag.populate("tagList").execPopulate(),
   ])
     .then(function (results) {
-      let user = results[0];
-      return res.json({ item: req.item.toJSONFor(user) });
+      let item = results[0];
+      return res.json({ item: req.item.toJSONFor(item) });
     })
     .catch(next);
 });
