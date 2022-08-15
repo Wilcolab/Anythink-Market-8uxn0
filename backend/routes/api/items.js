@@ -22,18 +22,18 @@ router.param("item", function (req, res, next, slug) {
     .catch(next);
 });
 
-// router.param("title", function (req, res, next, slug) {
-//   Item.find({ slug: slug })
-//     .populate("seller")
-//     .then(function (title) {
-//       if (!title) {
-//         return res.sendStatus();
-//       }
-//       req.title = title;
-//       return next();
-//     })
-//     .catch(next);
-// });
+router.param("title", function (req, res, next, slug) {
+  Item.find({ slug: slug })
+    .populate("seller")
+    .then(function (title) {
+      if (!title) {
+        return res.sendStatus(404);
+      }
+      req.title = title;
+      return next();
+    })
+    .catch(next);
+});
 
 router.param("comment", function (req, res, next, id) {
   Comment.findById(id)
