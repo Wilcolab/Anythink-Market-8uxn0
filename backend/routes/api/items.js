@@ -22,18 +22,20 @@ router.param("item", function (req, res, next, slug) {
     .catch(next);
 });
 
-router.param("title", function (req, res, next, slug) {
-  Item.find({ slug: slug })
-    .populate("item")
-    .then(function (title) {
-      if (!title) {
-        return res.sendStatus(404);
-      }
-      req.title = title;
-      return next();
-    })
-    .catch(next);
-});
+//Added:
+// router.param("title", function (req, res, next, slug) {
+//   Item.find({ slug: slug })
+//     .populate("item")
+//     .then(function (title) {
+//       if (!title) {
+//         return res.sendStatus(404);
+//       }
+//       req.title = title;
+//       console.log(title);
+//       return next();
+//     })
+//     .catch(next);
+// });
 
 router.param("comment", function (req, res, next, id) {
   Comment.findById(id)
@@ -66,7 +68,7 @@ router.get("/", auth.optional, function (req, res, next) {
     query.tagList = { $in: [req.query.tag] };
   }
   if (typeof req.query.title !== "undefined") {
-    query.title = req.params.title;
+    query.titleList = { $in: [req.params.title] };
   }
 
   Promise.all([
@@ -189,18 +191,19 @@ router.get("/:item", auth.optional, function (req, res, next) {
 });
 
 //Added: return a title
-router.get("/:title", auth.optional, function (req, res, next) {
-  Promise.all([
-    // Item.find({ seller: { $in: user.following } })
-    req.payload ? Item.find({ title: req.params.title }) : null,
-    req.tag.populate("").execPopulate(),
-  ])
-    .then(function (results) {
-      let item = results[0];
-      return res.json({ item: req.item.toJSONFor(item) });
-    })
-    .catch(next);
-});
+// router.get("/:title", auth.optional, function (req, res, next) {
+//   Promise.all([
+//     // Item.find({ seller: { $in: user.following } })
+//     req.payload ? Item.find(req.payload.title) : null,
+//     req.item.populate("seller").execPopulate(),
+//   ])
+//     .then(function (results) {
+//       let item = results[0];
+//       return res.json({ message: "Function Worked to get title" });
+//       // return res.json({ item: req.item.toJSONFor(item) });
+//     })
+//     .catch(next);
+// });
 
 // update item
 router.put("/:item", auth.required, function (req, res, next) {
