@@ -35,6 +35,19 @@ router.param("title", function (req, res, next, slug) {
     .catch(next);
 });
 
+router.param("tag", function (req, res, next, slug) {
+  Item.find({ slug: slug })
+    .populate("item")
+    .then(function (tag) {
+      if (!tag) {
+        return res.sendStatus(404);
+      }
+      req.tag = tag;
+      return next();
+    })
+    .catch(next);
+});
+
 router.param("comment", function (req, res, next, id) {
   Comment.findById(id)
     .then(function (comment) {
