@@ -35,19 +35,6 @@ router.param("title", function (req, res, next, slug) {
     .catch(next);
 });
 
-router.param("tag", function (req, res, next, slug) {
-  Item.find({ slug: slug })
-    .populate("item")
-    .then(function (tag) {
-      if (!tag) {
-        return res.sendStatus(404);
-      }
-      req.tag = tag;
-      return next();
-    })
-    .catch(next);
-});
-
 router.param("comment", function (req, res, next, id) {
   Comment.findById(id)
     .then(function (comment) {
@@ -201,12 +188,12 @@ router.get("/:item", auth.optional, function (req, res, next) {
     .catch(next);
 });
 
-//Added: return a tag
-router.get("/:tag", auth.optional, function (req, res, next) {
+//Added: return a title
+router.get("/:title", auth.optional, function (req, res, next) {
   Promise.all([
     // Item.find({ seller: { $in: user.following } })
-    req.payload ? Item.find({ tagList: req.params.tag }) : null,
-    req.tag.populate("tagList").execPopulate(),
+    req.payload ? Item.find({ title: req.params.title }) : null,
+    req.tag.populate("").execPopulate(),
   ])
     .then(function (results) {
       let item = results[0];
@@ -216,7 +203,6 @@ router.get("/:tag", auth.optional, function (req, res, next) {
 });
 
 // update item
-// router.put("/:item/:title", auth.required, function (req, res, next) {
 router.put("/:item", auth.required, function (req, res, next) {
   User.findById(req.payload.id).then(function (user) {
     if (req.item.seller._id.toString() === req.payload.id.toString()) {
@@ -367,6 +353,7 @@ router.delete(
         .then(Comment.find({ _id: req.comment._id }).remove().exec())
         .then(function () {
           res.sendStatus(204);
+          tagList;
         });
     } else {
       res.sendStatus(403);
