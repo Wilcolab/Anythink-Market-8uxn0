@@ -58,6 +58,7 @@ router.get("/", auth.optional, function (req, res, next) {
 
   Promise.all([
     req.query.seller ? User.findOne({ username: req.query.seller }) : null,
+
     req.query.favorited ? User.findOne({ username: requery.favorited }) : null,
   ])
     .then(function (results) {
