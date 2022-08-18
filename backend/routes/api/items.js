@@ -53,7 +53,9 @@ router.get("/", auth.optional, function (req, res, next) {
     query.tagList = { $in: [req.query.tag] };
   }
   if (typeof req.query.title !== "undefined") {
-    query.title = { $in: [req.query.title] };
+    query.title = { $regex: req.query.title, $options: "i" };
+
+    // query.title = { $in: [req.query.title] }
   }
 
   Promise.all([
@@ -61,7 +63,7 @@ router.get("/", auth.optional, function (req, res, next) {
 
     req.query.favorited ? User.findOne({ username: requery.favorited }) : null,
 
-    req.query.tite ? User.find({ title: req.query.tite }) : null,
+    req.query.title ? User.find({ title: req.query.title }) : null,
     // req.query.tite ? User.find({ title: requery.tite }) : null,
   ])
     .then(function (results) {
