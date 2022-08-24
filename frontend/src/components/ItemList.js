@@ -15,11 +15,28 @@ const ItemList = (props) => {
   return (
     <div className="container py-2">
       <div className="row">
-        {searchTitle && searchTitle.length > 2 && filteredItems ? (
+        {searchTitle &&
+        searchTitle.length > 2 &&
+        filteredItems &&
+        filteredItems.length > 0 ? (
           <div>
             {filteredItems.map((item) => (
               <ItemPreview item={item} />
             ))}{" "}
+          </div>
+        ) : searchTitle &&
+          searchTitle.length > 2 &&
+          filteredItems.length === 0 ? (
+          <div>
+            <div className="card">
+              <div className="card-body text-dark text-align-center">
+                <h4>Warning You Searched Incorrectly!</h4>
+                <p className="card-text">
+                  We do not stock {searchTitle}, please search for something
+                  better
+                </p>
+              </div>
+            </div>
           </div>
         ) : (
           <>
