@@ -8,6 +8,8 @@ import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER,
+  HOME_PAGE_SEARCH_TEXT,
+  APPLY_TITLE_FILTER,
 } from "../../constants/actionTypes";
 
 const Promise = global.Promise;
@@ -16,6 +18,11 @@ const mapStateToProps = (state) => ({
   ...state.home,
   appName: state.common.appName,
   token: state.common.token,
+  searchTitle: state.searchTitle,
+  items: state.items,
+  itemList: state.itemList,
+  searchedItems: state.searchedITems,
+  filteredItems: state.filteredItems,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -24,6 +31,9 @@ const mapDispatchToProps = (dispatch) => ({
   onLoad: (tab, pager, payload) =>
     dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
   onUnload: () => dispatch({ type: HOME_PAGE_UNLOADED }),
+  onChangeSearch: (payload) =>
+    dispatch({ type: HOME_PAGE_SEARCH_TEXT, payload }),
+  onSearch: (payload) => dispatch({ type: APPLY_TITLE_FILTER, payload }),
 });
 
 class Home extends React.Component {
@@ -45,11 +55,21 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-page">
-        <Banner />
+        <Banner
+          searchTitle={this.props.searchTitle}
+          onChangeSearch={this.props.onChangeSearch}
+          onSearch={this.props.onSearch}
+          items={this.props.items}
+        />
 
         <div className="container page">
           <Tags tags={this.props.tags} onClickTag={this.props.onClickTag} />
-          <MainView />
+          <MainView
+            itemList={this.props.itemList}
+            searchTitle={this.props.searchTitle}
+            searchedItems={this.props.searchedItems}
+            filteredItems={this.props.filteredItems}
+          />
         </div>
       </div>
     );
