@@ -11,7 +11,7 @@ export const SearchBar = ({
   async function handleChange(e) {
     onChangeSearch({ searchTitle: e });
     await onSearch({ searchTerm: e });
-    LengthfilteredItemsLength = filteredItems.length;
+    filteredItemsLength = filteredItems.length;
   }
 
   return (
