@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export const SearchBar = ({
   searchTitle,
@@ -6,13 +6,18 @@ export const SearchBar = ({
   onSearch,
   filteredItems,
 }) => {
+  const [filteredItemsLength, setFilteredItemsLength] = useState(1);
+
   const placeholderText = "What is it that you truly desire?";
-  let filteredItemsLength = 1000;
   async function handleChange(e) {
-    onChangeSearch({ searchTitle: e });
+    await onChangeSearch({ searchTitle: e });
     await onSearch({ searchTerm: e });
-    filteredItemsLength = filteredItems.length;
   }
+  useEffect(() => {
+    if (filteredItems) {
+      setFilteredItemsLength(filteredItems.length);
+    }
+  }, [filteredItems]);
 
   return (
     <div>
@@ -26,6 +31,7 @@ export const SearchBar = ({
         onChange={(e) => handleChange(e.target.value)}
       />
       <div>
+        <div>filtered items length: {filteredItemsLength}</div>
         {searchTitle && searchTitle.length > 2 && filteredItemsLength === 0 ? (
           <div>
             <div className="card p-4 m-2">
