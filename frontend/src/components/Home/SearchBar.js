@@ -7,11 +7,11 @@ export const SearchBar = ({
   filteredItems,
 }) => {
   const placeholderText = "What is it that you truly desire?";
-
+  let filteredItemsLength;
   async function handleChange(e) {
     onChangeSearch({ searchTitle: e });
     await onSearch({ searchTerm: e });
-    const filteredItemsLength = filteredItems.length;
+    filteredItemsLength = filteredItems.length;
   }
 
   return (
