@@ -11,6 +11,7 @@ export const SearchBar = ({
   async function handleChange(e) {
     onChangeSearch({ searchTitle: e });
     await onSearch({ searchTerm: e });
+    const filteredItemsLength = filteredItems.length;
   }
 
   return (
@@ -25,7 +26,7 @@ export const SearchBar = ({
         onChange={(e) => handleChange(e.target.value)}
       />
       <div>
-        {searchTitle && searchTitle.length > 2 && filteredItems.length === 0 ? (
+        {searchTitle && searchTitle.length > 2 && filteredItemsLength === 0 ? (
           <div>
             <div className="card p-4 m-2">
               <div className="card-body text-dark text-align-center">
