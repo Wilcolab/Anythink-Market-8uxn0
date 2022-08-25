@@ -18,11 +18,11 @@ const mapStateToProps = (state) => ({
   ...state.home,
   appName: state.common.appName,
   token: state.common.token,
-  searchTitle: state.searchTitle,
+  searchTitle: state.home.searchTitle,
   items: state.items,
   itemList: state.itemList,
-  searchedItems: state.searchedITems,
-  filteredItems: state.filteredItems,
+  searchedItems: state.searchedItems,
+  filteredItems: state.itemList.filteredItems,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -60,6 +60,7 @@ class Home extends React.Component {
           onChangeSearch={this.props.onChangeSearch}
           onSearch={this.props.onSearch}
           items={this.props.items}
+          filteredItems={this.props.filteredItems}
         />
 
         <div className="container page">

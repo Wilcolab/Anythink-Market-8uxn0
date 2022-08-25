@@ -1,6 +1,12 @@
 import React from "react";
 
-export const SearchBar = ({ searchTitle, onChangeSearch, onSearch, items }) => {
+export const SearchBar = ({
+  searchTitle,
+  onChangeSearch,
+  onSearch,
+
+  filteredItems,
+}) => {
   //   const [textInput, setTextInput] = useState("");
   const placeholderText = "What is it that you truly desire?";
 
@@ -21,6 +27,21 @@ export const SearchBar = ({ searchTitle, onChangeSearch, onSearch, items }) => {
         value={searchTitle}
         onChange={(e) => handleChange(e.target.value)}
       />
+      <div>
+        {searchTitle && searchTitle.length > 2 && filteredItems.length === 0 ? (
+          <div>
+            <div className="card p-4 m-2">
+              <div className="card-body text-dark text-align-center">
+                <h4>Warning You Searched Incorrectly!</h4>
+                <p className="card-text">
+                  We do not stock {searchTitle}, please search for something
+                  better
+                </p>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };
