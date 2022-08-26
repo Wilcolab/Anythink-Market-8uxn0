@@ -66,14 +66,15 @@ class Home extends React.Component {
 
         <div className="container page">
           <Tags tags={this.props.tags} onClickTag={this.props.onClickTag} />
-          <SearchBarMessage
-            searchTitle={this.props.searchTitle}
-            filteredItems={this.props.filteredItems}
-          />
 
           {this.props.searchTitle &&
           this.props.searchTitle.length > 2 &&
-          this.props.filteredItems.length === 0 ? null : (
+          this.props.filteredItems.length === 0 ? (
+            <SearchBarMessage
+              searchTitle={this.props.searchTitle}
+              filteredItems={this.props.filteredItems}
+            />
+          ) : (
             <MainView
               itemList={this.props.itemList}
               searchTitle={this.props.searchTitle}
