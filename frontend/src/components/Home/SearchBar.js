@@ -31,7 +31,6 @@ export const SearchBar = ({
         onChange={(e) => handleChange(e.target.value)}
       />
       <div>
-        <div>filtered items length: {filteredItemsLength}</div>
         {searchTitle && searchTitle.length > 2 && filteredItemsLength === 0 ? (
           <div>
             <div className="card p-4 m-2">
