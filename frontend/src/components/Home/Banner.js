@@ -25,6 +25,7 @@ const Banner = ({
           <span className="px-2" id="get-part">
             A place to{" "}
             <span
+              id="get"
               className="text-decoration-none bg-none border-0 "
               onClick={() => handleClick()}
             >
