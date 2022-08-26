@@ -2,7 +2,13 @@ import React from "react";
 import logo from "../../imgs/logo.png";
 import { SearchBar } from "./SearchBar";
 
-const Banner = ({ searchTitle, onChangeSearch, onSearch, items }) => {
+const Banner = ({
+  searchTitle,
+  onChangeSearch,
+  onSearch,
+  items,
+  filteredItems,
+}) => {
   return (
     <div className="banner text-white">
       <div className="container p-4 text-center">
@@ -16,6 +22,7 @@ const Banner = ({ searchTitle, onChangeSearch, onSearch, items }) => {
             onChangeSearch={onChangeSearch}
             onSearch={onSearch}
             items={items}
+            filteredItems={filteredItems}
           />
           <span className="px-2"> the cool stuff.</span>
         </div>

@@ -1,17 +1,14 @@
 import React from "react";
 
-export const SearchBar = ({ searchTitle, onChangeSearch, onSearch, items }) => {
-  //   const [textInput, setTextInput] = useState("");
+export const SearchBar = ({ searchTitle, onChangeSearch, onSearch }) => {
   const placeholderText = "What is it that you truly desire?";
-
-  function handleChange(e) {
-    onChangeSearch({ searchTitle: e });
-    onSearch({ searchTerm: e });
+  async function handleChange(e) {
+    await onChangeSearch({ searchTitle: e });
+    await onSearch({ searchTerm: e });
   }
 
   return (
     <div>
-      {/* <>Search Term: {textInput ? <p>{textInput}</p> : null}</> */}
       <input
         style={{ width: "350px" }}
         className="border border-primary border-1 rounded-sm"

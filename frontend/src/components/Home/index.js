@@ -2,6 +2,7 @@ import Banner from "./Banner";
 import MainView from "./MainView";
 import React from "react";
 import Tags from "./Tags";
+import { SearchBarMessage } from "./SearchBarMessage";
 import agent from "../../agent";
 import { connect } from "react-redux";
 import {
@@ -18,11 +19,11 @@ const mapStateToProps = (state) => ({
   ...state.home,
   appName: state.common.appName,
   token: state.common.token,
-  searchTitle: state.searchTitle,
+  searchTitle: state.home.searchTitle,
   items: state.items,
   itemList: state.itemList,
-  searchedItems: state.searchedITems,
-  filteredItems: state.filteredItems,
+  searchedItems: state.searchedItems,
+  filteredItems: state.itemList.filteredItems,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -60,16 +61,27 @@ class Home extends React.Component {
           onChangeSearch={this.props.onChangeSearch}
           onSearch={this.props.onSearch}
           items={this.props.items}
+          filteredItems={this.props.filteredItems}
         />
 
         <div className="container page">
           <Tags tags={this.props.tags} onClickTag={this.props.onClickTag} />
-          <MainView
-            itemList={this.props.itemList}
-            searchTitle={this.props.searchTitle}
-            searchedItems={this.props.searchedItems}
-            filteredItems={this.props.filteredItems}
-          />
+
+          {this.props.searchTitle &&
+          this.props.searchTitle.length > 2 &&
+          this.props.filteredItems.length === 0 ? (
+            <SearchBarMessage
+              searchTitle={this.props.searchTitle}
+              filteredItems={this.props.filteredItems}
+            />
+          ) : (
+            <MainView
+              itemList={this.props.itemList}
+              searchTitle={this.props.searchTitle}
+              searchedItems={this.props.searchedItems}
+              filteredItems={this.props.filteredItems}
+            />
+          )}
         </div>
       </div>
     );

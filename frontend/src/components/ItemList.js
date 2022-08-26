@@ -16,11 +16,11 @@ const ItemList = (props) => {
     <div className="container py-2">
       <div className="row">
         {searchTitle && searchTitle.length > 2 && filteredItems ? (
-          <div>
-            {filteredItems.map((item) => (
+          filteredItems.map((item) => (
+            <div className="col-sm-4 pb-2" key={item.slug}>
               <ItemPreview item={item} />
-            ))}{" "}
-          </div>
+            </div>
+          ))
         ) : (
           <>
             {items.map((item) => {
