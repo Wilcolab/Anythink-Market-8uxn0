@@ -70,12 +70,17 @@ class Home extends React.Component {
             searchTitle={this.props.searchTitle}
             filteredItems={this.props.filteredItems}
           />
-          <MainView
-            itemList={this.props.itemList}
-            searchTitle={this.props.searchTitle}
-            searchedItems={this.props.searchedItems}
-            filteredItems={this.props.filteredItems}
-          />
+
+          {this.props.searchTitle &&
+          this.props.searchTitle.length > 2 &&
+          this.props.filteredItems.length === 0 ? null : (
+            <MainView
+              itemList={this.props.itemList}
+              searchTitle={this.props.searchTitle}
+              searchedItems={this.props.searchedItems}
+              filteredItems={this.props.filteredItems}
+            />
+          )}
         </div>
       </div>
     );

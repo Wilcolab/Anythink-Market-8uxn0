@@ -5,9 +5,7 @@ export const SearchBarMessage = ({ searchTitle, filteredItems }) => {
 
   useEffect(() => {
     if (filteredItems) {
-      setTimeout(() => {
-        setFilteredItemsLength(filteredItems.length);
-      }, 3000);
+      setFilteredItemsLength(filteredItems.length);
     }
   }, [filteredItems]);
 
