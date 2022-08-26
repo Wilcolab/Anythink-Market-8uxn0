@@ -10,7 +10,7 @@ export const SearchBarMessage = ({ searchTitle, filteredItems }) => {
   }, [filteredItems]);
 
   return (
-    <div className="m-auto" style={{ width: "500px" }}>
+    <div id="empty" className="m-auto" style={{ width: "500px" }}>
       {searchTitle && searchTitle.length > 2 && filteredItemsLength === 0 ? (
         <div>
           <div className="card p-4 m-2">
