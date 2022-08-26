@@ -23,7 +23,7 @@ const Banner = ({
         <img src={logo} alt="banner" />
         <div className="text-decoration-none justify-content-center px-2 row m-auto w-100">
           <span className="px-2" id="get-part">
-            A place to{""}
+            A place to{" "}
             <span
               className="text-decoration-none bg-none border-0 "
               onClick={() => handleClick()}
