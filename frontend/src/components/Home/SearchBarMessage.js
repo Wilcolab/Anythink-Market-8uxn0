@@ -5,9 +5,12 @@ export const SearchBarMessage = ({ searchTitle, filteredItems }) => {
 
   useEffect(() => {
     if (filteredItems) {
-      setFilteredItemsLength(filteredItems.length);
+      setTimeout(() => {
+        setFilteredItemsLength(filteredItems.length);
+      }, 3000);
     }
   }, [filteredItems]);
+
   return (
     <div className="m-auto" style={{ width: "500px" }}>
       {searchTitle && searchTitle.length > 2 && filteredItemsLength === 0 ? (
