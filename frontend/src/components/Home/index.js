@@ -2,6 +2,7 @@ import Banner from "./Banner";
 import MainView from "./MainView";
 import React from "react";
 import Tags from "./Tags";
+import { SearchBarMessage } from "./SearchBarMessage";
 import agent from "../../agent";
 import { connect } from "react-redux";
 import {
@@ -65,6 +66,10 @@ class Home extends React.Component {
 
         <div className="container page">
           <Tags tags={this.props.tags} onClickTag={this.props.onClickTag} />
+          <SearchBarMessage
+            searchTitle={this.props.searchTitle}
+            filteredItems={this.props.filteredItems}
+          />
           <MainView
             itemList={this.props.itemList}
             searchTitle={this.props.searchTitle}
