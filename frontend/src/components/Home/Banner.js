@@ -25,7 +25,7 @@ const Banner = ({
           <span className="px-2" id="get-part">
             A place to{" "}
             <span
-              id="get"
+              id="get-part"
               className="text-decoration-none bg-none border-0 "
               onClick={() => handleClick()}
             >
@@ -41,7 +41,7 @@ const Banner = ({
               filteredItems={filteredItems}
             />
           ) : null}
-          <span className="px-2"> the cool stuff.</span>
+          <span className="px-1"> the cool stuff.</span>
         </div>
       </div>
     </div>
