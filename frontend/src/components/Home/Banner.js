@@ -22,16 +22,8 @@ const Banner = ({
       <div className="container p-4 text-center">
         <img src={logo} alt="banner" />
         <div className="text-decoration-none justify-content-center px-2 row m-auto w-100">
-          <span className="px-2" id="get-part">
-            A place to{" "}
-            <button
-              style={{ textDecoration: "none", backgroundColor: "none" }}
-              id="get-part"
-              className="text-decoration-none bg-none border-0 "
-              onClick={() => handleClick()}
-            >
-              get
-            </button>
+          <span className="px-2" id="get-part" onClick={() => handleClick()}>
+            A place to get
           </span>
           {showSearch ? (
             <SearchBar
